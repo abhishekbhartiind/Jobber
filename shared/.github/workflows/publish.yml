@@ -1,0 +1,48 @@
+# This GitHub Actions workflow automatically publishes a Node.js package to the GitHub Package Registry
+# whenever changes are pushed to the main branch or a pull request is made to the main branch.
+
+name: Publish
+# This is the name of the workflow. It will appear in the GitHub Actions tab of your repository.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+# The workflow is triggered on push events and pull request events to the main branch.
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    # This job runs on the latest version of an Ubuntu virtual machine.
+
+    permissions:
+      contents: read
+      packages: write
+    # Permissions needed for the job: read access to repository contents and write access to packages.
+
+    steps:
+      - uses: actions/checkout@v4
+      # Step 1: Checkout the repository so that the workflow can access the files.
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      # Step 2: Set up Node.js environment. This action installs Node.js version 20.x.
+
+      - run: npm install
+      # Step 3: Install dependencies. This runs 'npm install' to install all dependencies listed in package.json.
+
+      - run: npm run build
+      # Step 4: Build the project. This runs the build script defined in package.json, usually for compiling or bundling the code.
+
+      - run: |
+          echo @256Taras:https://npm.pkg.github.com/ > build/.npmrc
+          echo '//npm.pkg.github.com/:_authToken=${JOBBER_NPM_TOKEN}' >> build/.npmrc
+      # Step 5: Set up .npmrc file for publishing. This configures npm to use GitHub Package Registry for the given user and sets up authentication using a token.
+
+      - run: npm publish
+        working-directory: ./build
+        env:
+          JOBBER_NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Step 6: Publish the package. This runs 'npm publish' in the 'build' directory using the authentication token stored in GitHub secrets.
