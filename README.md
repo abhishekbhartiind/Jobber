@@ -223,7 +223,7 @@ Configure and deploy the following tools for centralized logging and observabili
 
 ![Screenshot 2024-07-01 112658](https://github.com/almoghindi/Jobber/assets/102804545/f1f1f427-ef14-4c70-92ac-081655d4e885)
 
-## Chat page
+## Chat Page
 
 ![Screenshot 2024-07-01 154302](https://github.com/almoghindi/Jobber/assets/102804545/31db7d3e-23d5-45f1-9def-1c8fbb0cb2ff)
 
