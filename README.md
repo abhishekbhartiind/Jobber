@@ -1,104 +1,232 @@
-<h1 align="center">Jobber Ecommerce</h1>
+# Jobber
 
-<p align="center">Ecommerce marketplace app using event-driven Microservices with Node, Typescript, Kubernetes, Terraform, AWS and React. 
-This repo contains all codes for the ECommerce freelance marketplace application.</p>
-<br />
+Jobber is an advanced e-commerce marketplace application designed with a microservices architecture. It leverages a modern tech stack to ensure scalability, reliability, and maintainability. This application showcases best practices in frontend and backend development, containerization, orchestration, CI/CD, monitoring, and more.
 
-> ## Jobber Client
-* The `jobber-client` folder contains the frontend code.
-* The frontend application is built using `React`, `Typescript` and `Tailwindcss`.
-* The mobile application is built using `React Native`, `Typescript` and `NativeBase`.
-<br /><br />
+## What the App is Doing
+Jobber provides a platform where users can create and manage freelance gigs, purchase services, and communicate with service providers. The application supports various features essential for an e-commerce marketplace, including user authentication, gig management, order processing, secure payments, real-time chat, notifications, and reviews. The microservices architecture ensures that each functionality is handled by a dedicated service, making the system modular and scalable.
 
-> ## Microservices
-* The `microservices` folder contains all the backend code for the application's services.
-* The services can be started either individually from the terminal or via docker compose.
-* [Microservices README file](https://github.com/vynnydev/jobberapp-microservices/blob/main/microservices/README.md)
-<br /><br />
+## Features
 
-> ## Microservices Design Patterns & Principles
+### Frontend
 
-![alt text](./infraestructure/images/clean-dependency-inversion.png "Clean Architecture in Microservices")
+- **React**: For building a dynamic and responsive user interface.
+- **TypeScript**: Enhances type safety and improves maintainability.
+- **TailwindCSS**: Utility-first CSS framework for efficient styling.
+- **Redux Toolkit (RTK) Query**: Efficient data fetching and state management.
 
-* 1 - Entity:  
+### Backend
 
-    * Purpose: Represents the main entities or domain objects of the application, such as business objects. They contain only domain-related logic and have no knowledge of implementation details, such as databases or user interfaces. 
-    Dependencies: Should not depend on any other layer, especially technical details. 
+- **Node.js with TypeScript**: Implements a clean 3-layer architecture (controller, service, repository).
+- **Express**: Framework for building RESTful APIs.
+- **Socket.io**: Facilitates real-time, bidirectional communication.
+- **Stripe**: Handles secure payment processing.
+- **RabbitMQ**: Message broker for asynchronous communication between microservices.
 
-* 2 - Use Case: 
+### Databases
 
-    * Purpose: Defines the application's use cases. Each use case is a specific functionality or task that the application can perform. It contains the business logic and coordinates the interaction between entities. 
-    Dependencies: Can depend on entities, but should not depend directly on technical details such as user interfaces or databases. 
+- **MongoDB**: NoSQL database for flexible and scalable data storage.
+- **MySQL**: Relational database management system.
+- **PostgreSQL**: Advanced open-source relational database.
+- **Elasticsearch**: Search and analytics engine.
+- **Redis**: In-memory data structure store, used as a database, cache, and message broker.
 
-* 3 - Interface and Adapter: 
+## Testing
 
-    * Purpose: This layer deals with interaction with the world outside the application, such as user interfaces, external APIs or databases. Interfaces define the contracts that the application needs to implement, while adapters provide the actual implementation to fulfill these contracts. 
-    Dependencies: May depend on use cases and entities, but should not depend on specific technical details such as frameworks. 
+- **Jest**: JavaScript testing framework.
+- **Supertest**: Library for testing Node.js HTTP servers.
 
-* 4 - Framework: 
+## DevOps and CI/CD
 
-    * Purpose: This layer contains technical details and concrete implementations of frameworks, libraries and external components. It communicates with the operating system, databases, web services etc. 
-    Dependencies: It may depend on the other layers of the application to provide specific functionality, but the internal layers should not depend on it directly. 
+- **Docker**: Containerization platform to package applications and their dependencies.
+- **Kubernetes**: Orchestrates the deployment, scaling, and management of containerized applications.
+- **Minikube**: Local Kubernetes environment.
+- **AWS EKS**: Managed Kubernetes service on AWS.
+- **Jenkins**: Automates CI/CD pipelines.
+- **Terraform**: Infrastructure as Code (IaC) tool for building, changing, and versioning infrastructure.
+- **Docker Compose**: Tool for defining and running multi-container Docker applications.
 
-    * Clean Architecture emphasizes the clear separation of responsibilities between these layers, with the internal layers (entities and use cases) being independent of the external layers (interfaces and adapters, and frameworks). This facilitates the maintenance, testability and evolution of the application, making it more scalable and adaptable to changes in requirements and technologies. 
+## Monitoring and Observability
 
-* Principles
+- **Elastic Stack (Elasticsearch, Logstash, Kibana)**: For centralized logging, search, and visualization.
+- **Prometheus**: Monitoring system and time series database.
+- **Grafana**: Analytics and interactive visualization web application.
+- **Heartbeat**: Monitor the availability of services.
+- **Metricbeat**: Collects metrics from systems and services.
 
-    * Single Responsibility Principle (SRP)
-    * Open Closed Principle (OCP)
-    * Liskov Substitution Principle (LSP)
-    * Interface Segregation Principle (ISP)
-    * Dependency Inversion Principle (DIP)
-    * Separation of Concerns (SOC)
-    * Don't Repeat Yourself (DRY)
-    * You Aren't Gonna Need It (YAGNI)
-    * Keep It Simple, Silly (KISS)
-    * Composition Over Inheritance
-    * Small Commits
+## Project Structure
+```bash
+Jobber/
+├── auth/ # Authentication service
+├── chat/ # Chat service
+├── client/ # Frontend application
+├── gateway/ # API gateway
+├── gig/ # Gig management service
+├── infra/ # Infrastructure as code (Terraform, Kubernetes)
+├── notifications/ # Notifications service
+├── order/ # Order management service
+├── review/ # Reviews and ratings service
+├── shared/ # Shared utilities and modules
+├── users/ # User management service
+```
+## Microservices and Their Responsibilities
 
-* Design Patterns
+### Auth Service
 
-    * Factory
-    * Adapter
-    * Composite
-    * Decorator
-    * Proxy
-    * Dependency Injection
-    * Abstract Server
-    * Singleton
+- **Functionality**: Handles user authentication and authorization.
+- **Key Features**:
+  - User registration and login.
+  - JWT-based authentication for secure access to other services.
+  - Password management and security.
 
-* Methodologies and Designs
+### User Service
 
-    * Clean Architecture
-    * DDD
-    * Conventional Commits
-    * GitFlow
-    * Modular Design
-    * Dependency Diagrams
-    * Use Cases
-    * Continuous Integration
-    * Continuous Delivery
-    * Continuous Deployment
-<br /><br />
+- **Functionality**: Manages user profiles and related operations.
+- **Key Features**:
+  - CRUD operations for user profiles.
+  - Managing user settings and preferences.
+  - Integration with Auth service for secure access.
 
-> ## Microservices Architecture:
-![alt text](./infraestructure/images/project-architecture.png "Microservices on AWS")
-<br /><br />
+### Gig Service
 
-> ## Messaging Broker Architecture:
-![alt text](./infraestructure/images/messaging-architecture.png "Messaging Broker Architecture")
-<br /><br />
+- **Functionality**: Manages the creation, update, and retrieval of gigs.
+- **Key Features**:
+  - CRUD operations for gigs.
+  - Search and filter functionality for gigs.
+  - Handling gig metadata and categorization.
 
-> ## Infraestructure
-* The `volumes` folder contains files that are used to run services for local development.
-* [Volumes README file](https://github.com/vynnydev/jobberapp-microservices/blob/main/infraestructure/volumes/README.md)
-* The `terraform` folder contains files that are used to build infraestructure in AWS cloud to run services
-<br /><br/>
+### Order Service
 
-> ## Kubernetes
-* The `jobber-k8s` folder contains the objects code needed to deploy the microservices to kubernetes.
-* The microservices are deployed to both `Minikube` and `AWS EKS Cluster`.
-<br /><br/>
+- **Functionality**: Processes and manages orders related to gigs.
+- **Key Features**:
+  - Creating and updating orders.
+  - Tracking order status (created, cancelled, completed).
+  - Associating orders with users and gigs.
 
-> ## Microservices on AWS:
-![alt text](./infraestructure/images/aws-infra.png "Microservices on AWS")
+### Payment Service
+
+- **Functionality**: Handles secure payment processing.
+- **Key Features**:
+  - Integrates with Stripe for payment transactions.
+  - Validates payment information and processes payments.
+  - Manages payment records and statuses.
+
+### Chat Service
+
+- **Functionality**: Enables real-time messaging between users.
+- **Key Features**:
+  - Real-time, bidirectional communication using Socket.io.
+  - Message history and storage.
+  - User notifications for new messages.
+
+### Notification Service
+
+- **Functionality**: Manages and delivers notifications to users.
+- **Key Features**:
+  - Real-time notifications for various events (new messages, order updates, etc.).
+  - Push notifications and email alerts.
+  - User preferences for notification settings.
+
+### Review Service
+
+- **Functionality**: Allows users to provide and view reviews and ratings for gigs.
+- **Key Features**:
+  - CRUD operations for reviews.
+  - Aggregating and displaying ratings for gigs.
+  - Moderation and reporting of reviews.
+
+### API Gateway
+
+- **Functionality**: Acts as the central entry point for all microservices.
+- **Key Features**:
+  - Routing requests to appropriate microservices.
+  - Centralized authentication and request validation.
+  - Load balancing and API rate limiting.
+
+## Setup and Usage
+
+### Installation
+
+# Jobber Project Setup and Deployment Guide
+
+## Clone the repository:
+   ```bash
+   git clone https://github.com/almoghindi/Jobber.git
+   cd Jobber
+   ```
+
+## Install Frontend Dependencies
+
+```bash
+cd client
+npm install
+cd ..
+```
+## Install Backend Dependencies for Each Service
+
+```bash
+cd auth && npm install
+cd ../chat && npm install
+cd ../gateway && npm install
+cd ../gig && npm install
+cd ../notifications && npm install
+cd ../order && npm install
+cd ../review && npm install
+cd ../users && npm install
+cd ..
+```
+
+## Deployment
+### Deploy Infrastructure Using Terraform
+```bash
+cd infra
+terraform init
+terraform apply
+```
+
+### Deploy Services to Kubernetes
+```bash
+kubectl apply -f infra/k8s
+```
+
+## Running the Application
+Ensure Docker and Kubernetes are running, then start all services using Docker Compose:
+```bash
+docker-compose up --build
+```
+
+# Monitoring and Logging Setup
+
+## Deploy Prometheus and Grafana for Monitoring
+
+Follow setup guides for Prometheus and Grafana to monitor your Jobber application.
+
+## Deploy Elasticsearch, Kibana, Heartbeat, and Metricbeat for Centralized Logging and Observability
+
+Configure and deploy the following tools for centralized logging and observability:
+
+- **Elasticsearch**: Search and analytics engine.
+- **Kibana**: Visualization tool for Elasticsearch data.
+- **Heartbeat**: Monitor the availability of services.
+- **Metricbeat**: Collects metrics from systems and services.
+
+## Media
+
+### Landing Page
+
+![Screenshot 2024-07-01 112231](https://github.com/almoghindi/Jobber/assets/102804545/ec1f708f-8be7-405e-9164-4dd2ac0e86a1)
+
+### Home Page
+
+![Screenshot 2024-07-01 112600](https://github.com/almoghindi/Jobber/assets/102804545/62e1c274-b04e-468f-bdac-464a1e00157c)
+
+### Profile Page
+
+![Screenshot 2024-07-01 112658](https://github.com/almoghindi/Jobber/assets/102804545/f1f1f427-ef14-4c70-92ac-081655d4e885)
+
+## Chat Page
+
+![Screenshot 2024-07-01 154302](https://github.com/almoghindi/Jobber/assets/102804545/31db7d3e-23d5-45f1-9def-1c8fbb0cb2ff)
+
+## Gig Page
+
+![Screenshot 2024-07-01 154419](https://github.com/almoghindi/Jobber/assets/102804545/1ac2d681-d23f-49c4-a1e9-bf7ce8d7ee1b)
